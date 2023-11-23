@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Игра Бусинки</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        /* Основные стили */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        #puzzles {
+            width: 90%;
+            max-width: 300px;
+        }
+
+        #puzzle1, #puzzle2, #puzzle3 {
+            background-color: #fff;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        p {
+            margin: 0 0 15px;
+            color: #333;
+        }
+
+        .answer {
+            width: calc(100% - 40px);
+            padding: 8px;
+            margin-bottom: 10px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+        }
+
+        button {
+            padding: 10px 20px;
+            border-radius: 5px;
+            background-color: #ff007f;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #d6006c;
+        }
+
+        /* Стили для модального окна */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            width: 80%;
+            max-width: 300px;
+            margin: 15% auto;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            position: relative;
+        }
+
+        .close {
+            color: #888;
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: #000;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .message {
+            font-size: 20px;
+            color: #333;
+        }
+
+        .heart {
+            color: #ff007f;
+        }
+    </style>
+</head>
+<body>
+    <h1>Головоломки</h1>
+    
+    <div id="puzzles">
+        <div id="puzzle1">
+            <p>Вопрос: Как меня зовут?</p>
+            <input type="text" class="answer" placeholder="Ответ">
+        </div>
+
+        <div id="puzzle2">
+            <p>Вопрос: Какой у меня ник в Instagram?</p>
+            <input type="text" class="answer" placeholder="Ответ">
+        </div>
+
+        <div id="puzzle3">
+            <p>Вопрос: Кто для меня самая красивая девушка на свете?</p>
+            <input type="text" class="answer" placeholder="Ответ">
+        </div>
+        
+        <button onclick="checkAnswers()">Проверить</button>
+    </div>
+
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <p class="message">Ты самая умная девушка на свете <span class="heart">&#10084;</span></p>
+        </div>
+    </div>
+
+    <script>
+        function checkAnswers() {
+            let answers = document.querySelectorAll('.answer');
+            let correctAnswers = ['бексунтай', '_bqlqpqn', 'самал'];
+            let allCorrect = true;
+
+            answers.forEach((answer, index) => {
+                if (answer.value.trim().toLowerCase() !== correctAnswers[index]) {
+                    allCorrect = false;
+                }
+            });
+
+            if (allCorrect) {
+                document.getElementById('myModal').style.display = 'block';
+            } else {
+                alert('Неправильно. Попробуйте угадать снова.');
+            }
+        }
+
+        function closeModal() {
+            document.getElementById('myModal').style.display = 'none';
+        }
+    </script>
+</body>
+</html>
